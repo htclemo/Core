@@ -9,7 +9,7 @@ There will be a Windows installer and a Linux installer. When the first demo is 
 ## Setup
 
 ```powershell
-cd C:\Users\Lemo\Documents\TheCore
+cd C:\Users\Lemo\Documents\Core
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
 pip install -r requirements.txt
@@ -36,7 +36,7 @@ After the venv is set up:
 .\create_shortcut.ps1
 ```
 
-This creates **TheCore.lnk** on your Desktop pointing at the project's `pythonw.exe` and `main.py`.
+This creates **Core.lnk** on your Desktop pointing at the project's `pythonw.exe` and `main.py`.
 
 ## Tabs
 
@@ -54,6 +54,4 @@ This creates **TheCore.lnk** on your Desktop pointing at the project's `pythonw.
 
 ## Notes
 
-- The PC-monitor sweep was removed — it cost 830 ms of CPU every second. The app is now a single AI workspace.
 - Ollama must be running (`ollama serve`) on the default port `11434` for the local models to work.
-- Cloud API keys live in `%APPDATA%\TheCore` — never in the database and never in the repository.
