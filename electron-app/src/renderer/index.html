@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Core — PC Monitor & AI Chat</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="vendor/xterm.css" />
+</head>
+<body>
+  <!-- ===== START SCREEN (the CORE boot console, min 7 sec) ===== -->
+  <div id="splash" class="splash">
+    <div class="splash-panel">
+      <span class="splash-corner tl"></span>
+      <span class="splash-corner tr"></span>
+      <span class="splash-corner bl"></span>
+      <span class="splash-corner br"></span>
+
+      <div class="core-head">
+        <div class="core-logo">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none"
+               stroke="#3ddc84" stroke-width="1.4" stroke-linecap="round">
+            <rect x="6" y="6" width="12" height="12" rx="2.5"></rect>
+            <line x1="9" y1="3.5" x2="9" y2="6"></line>
+            <line x1="12" y1="3.5" x2="12" y2="6"></line>
+            <line x1="15" y1="3.5" x2="15" y2="6"></line>
+            <line x1="9" y1="18" x2="9" y2="20.5"></line>
+            <line x1="12" y1="18" x2="12" y2="20.5"></line>
+            <line x1="15" y1="18" x2="15" y2="20.5"></line>
+            <line x1="3.5" y1="9" x2="6" y2="9"></line>
+            <line x1="3.5" y1="12" x2="6" y2="12"></line>
+            <line x1="3.5" y1="15" x2="6" y2="15"></line>
+            <line x1="18" y1="9" x2="20.5" y2="9"></line>
+            <line x1="18" y1="12" x2="20.5" y2="12"></line>
+            <line x1="18" y1="15" x2="20.5" y2="15"></line>
+          </svg>
+        </div>
+        <div class="core-titles">
+          <div class="core-title">CORE</div>
+          <div class="core-tag">Code Orchestration &amp; Real-time Engineering</div>
+        </div>
+        <div class="core-live">LIVE</div>
+      </div>
+
+      <div class="core-copy">
+        <div class="core-lead">Code. Observe. Refine. Execute.</div>
+        <div class="core-sub">Your code. Your AI. Your control.</div>
+        <div class="core-desc">An AI-powered development environment for Windows.</div>
+      </div>
+
+      <div class="core-cards">
+        <div class="core-card">
+          <span class="core-card-icon" data-glyph="brain"></span>
+          <div class="core-card-title">AI Intelligence</div>
+          <div class="core-card-text">Understand and generate code.</div>
+        </div>
+        <div class="core-card">
+          <span class="core-card-icon" data-glyph="bolt"></span>
+          <div class="core-card-title">Live Coding</div>
+          <div class="core-card-text">Edit and iterate instantly.</div>
+        </div>
+        <div class="core-card">
+          <span class="core-card-icon" data-glyph="bug"></span>
+          <div class="core-card-title">Smart Debugging</div>
+          <div class="core-card-text">Find and fix problems.</div>
+        </div>
+        <div class="core-card">
+          <span class="core-card-icon" data-glyph="terminal"></span>
+          <div class="core-card-title">Execution</div>
+          <div class="core-card-text">Test code in your workflow.</div>
+        </div>
+      </div>
+
+      <div class="splash-log" id="splash-log"></div>
+
+      <div class="splash-progress">
+        <span class="splash-bar"><span class="splash-bar-fill" id="splash-bar-fill"></span></span>
+        <span class="splash-pct" id="splash-pct">0%</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== MAIN APP ===== -->
+  <div id="app" class="app hidden">
+    <div class="main-area">
+      <!-- Tab: AI CHAT -->
+      <section id="tab-ai" class="tab-panel active">
+        <div class="ai-split">
+          <!-- Left Sidebar: workspaces → projects → conversations -->
+          <aside class="ai-sidebar" id="ai-sidebar">
+            <div class="sidebar-top">
+              <input
+                type="text"
+                id="sidebar-search"
+                class="sidebar-search"
+                placeholder="Search…"
+              />
+              <button id="btn-collapse" class="sidebar-icon-btn" title="Hide the sidebar">⟨</button>
+            </div>
+            <div class="sidebar-title">CORE AI</div>
+
+            <div class="section-label">WORKSPACES</div>
+            <div class="list-box" id="list-workspaces"></div>
+            <button class="sidebar-btn" id="btn-add-ws">+ NEW WORKSPACE</button>
+
+            <div class="section-label">PROJECTS</div>
+            <div class="list-box" id="list-projects"></div>
+            <button class="sidebar-btn" id="btn-new-proj">+ NEW PROJECT</button>
+
+            <div class="section-label">CONVERSATIONS</div>
+            <div class="list-box" id="list-conversations"></div>
+            <button class="sidebar-btn new-chat-btn" id="btn-new-chat">+ NEW CHAT</button>
+
+            <!-- The gear in the bottom-left corner: the settings -->
+            <div class="sidebar-bottom">
+              <button id="btn-settings" class="sidebar-gear" title="Settings">⚙</button>
+            </div>
+          </aside>
+          <button id="btn-expand" class="sidebar-expand-btn" title="Show the sidebar" hidden>›</button>
+
+          <!-- Center Chat -->
+          <div class="ai-chat">
+            <header class="chat-header">
+              <div class="model-selector">
+                <div id="load-spinner" class="load-spinner hidden"></div>
+                <span id="load-elapsed" class="load-elapsed hidden"></span>
+                <span id="status-lamp" class="status-lamp" data-state="loading"></span>
+                <span id="status-caption" class="status-lamp-text">OLLAMA</span>
+                <span id="status-text" class="status hidden">Local-LLM: CHECKING…</span>
+                <div class="mem-gauge" id="mem-gauge">
+                  <div class="mem-row">
+                    <span class="mem-caption">VRAM</span>
+                    <span class="mem-bar"><span class="mem-fill" id="mem-vram-fill"></span></span>
+                    <span class="mem-value" id="mem-vram-value">—</span>
+                  </div>
+                  <div class="mem-row">
+                    <span class="mem-caption">RAM</span>
+                    <span class="mem-bar"><span class="mem-fill" id="mem-ram-fill"></span></span>
+                    <span class="mem-value" id="mem-ram-value">—</span>
+                  </div>
+                </div>
+              </div>
+            </header>
+
+            <div class="chat-split" id="chat-split">
+              <!-- Messages -->
+              <div class="chat-scroll" id="chat-scroll">
+                <div id="message-container"></div>
+              </div>
+
+              <!-- Grip: grab and drag to stretch the console upwards -->
+              <div
+                class="split-grip hidden"
+                id="console-grip"
+                title="Drag to resize the console · double-click to reset"
+              >
+                <span class="grip-ridge"></span>
+                <span class="grip-ridge"></span>
+                <span class="grip-ridge"></span>
+              </div>
+
+              <!-- OpenCode Console: the real opencode TUI on a ConPTY -->
+              <div id="opencode-console" class="opencode-console hidden">
+                <div class="console-title">
+                  <span>CONSOLE</span>
+                  <span id="admin-badge" class="admin-badge" data-admin="false">NOT ADMIN</span>
+                  <button id="btn-run-admin" class="console-admin-btn">RUN AS ADMIN</button>
+                </div>
+                <div id="console-terminal" class="console-terminal"></div>
+                <div id="console-status" class="console-status">OPENCODE: CONSOLE NOT LOADED</div>
+              </div>
+            </div>
+
+            <!-- The composer: provider, scope, input, tools and action chips -->
+            <div class="composer" id="composer">
+              <div class="composer-top">
+                <!-- A native <select> cannot show per-option icons, so the
+                     provider picker is a small custom dropdown. -->
+                <div class="dropdown" id="provider-dropdown">
+                  <button class="composer-combo dropdown-trigger" id="provider-trigger">
+                    <span class="dropdown-icon" id="provider-icon"></span>
+                    <span id="provider-label">Local-LLM</span>
+                    <span class="dropdown-caret">▾</span>
+                  </button>
+                  <div class="dropdown-menu hidden" id="provider-menu">
+                    <div class="dropdown-item" data-provider="ollama">
+                      <span class="dropdown-icon" data-icon="local"></span>
+                      <span>Local-LLM</span>
+                    </div>
+                    <div class="dropdown-item" data-provider="cloud">
+                      <span class="dropdown-icon" data-icon="cloud"></span>
+                      <span>Cloud LLM</span>
+                    </div>
+                    <div class="dropdown-item" data-provider="opencode">
+                      <span class="dropdown-icon" data-icon="terminal"></span>
+                      <span>OpenCode</span>
+                    </div>
+                  </div>
+                </div>
+                <button id="btn-load" class="load-btn">LOAD MODEL</button>
+                <select id="scope-combo" class="composer-combo" title="The workspace and project this turn belongs to" hidden>
+                  <option>This PC</option>
+                </select>
+              </div>
+
+              <div class="composer-box">
+                <textarea
+                  id="chat-input"
+                  rows="3"
+                  placeholder="Plan, Build, / for skills, @ for context"
+                ></textarea>
+                <div class="composer-bottom">
+                  <button id="btn-attach" class="composer-icon-btn" title="Attach an image (needs a model with vision)" disabled>+</button>
+                  <div class="composer-spacer"></div>
+                  <!-- What the model can do: Vision · Tool Use · Reasoning —
+                       icons only, right next to the model name. -->
+                  <span id="capability-icons" class="capability-icons hidden"></span>
+                  <select id="model-combo" class="composer-model-combo"></select>
+                  <button id="btn-dictate" class="composer-icon-btn" title="Dictate (Windows voice typing)">🎤</button>
+                  <button id="btn-speak" class="composer-round-btn" title="Read the last answer out loud">🔊</button>
+                  <button id="btn-stop" class="composer-stop-btn" hidden>STOP</button>
+                </div>
+              </div>
+
+              <div class="composer-chips">
+                <button class="composer-chip" data-chip="multitask">Multitask</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Tab: SETTINGS -->
+      <section id="tab-settings" class="tab-panel hidden">
+        <div class="settings-page">
+          <div class="settings-page-header">
+            <div class="settings-page-title">SETTINGS</div>
+            <button id="btn-settings-back" class="settings-back-btn">←  BACK TO CHAT</button>
+          </div>
+
+          <div class="settings-page-body">
+            <!-- ---- Cloud providers ---- -->
+            <div class="settings-section">
+              <div class="settings-section-title">CLOUD PROVIDERS</div>
+              <div class="settings-hint">
+                Store an API key per provider. A key is needed before the
+                provider's models can be listed. Keys never leave this PC.
+              </div>
+              <div id="provider-cards" class="provider-cards"></div>
+            </div>
+
+            <!-- ---- Cloud models ---- -->
+            <div class="settings-section">
+              <div class="settings-section-title">CLOUD MODELS</div>
+              <div class="settings-row">
+                <span>Provider:</span>
+                <select id="settings-model-provider" class="settings-combo"></select>
+                <button id="btn-refresh-models" class="settings-save-btn">REFRESH MODELS</button>
+              </div>
+              <div id="settings-model-info" class="settings-model-info"></div>
+            </div>
+
+            <!-- ---- Local models ---- -->
+            <div class="settings-section">
+              <div class="settings-section-title">LOCAL MODELS (OLLAMA)</div>
+              <div class="settings-row">
+                <div id="settings-local-info" class="settings-model-info"></div>
+                <button id="btn-refresh-local" class="settings-save-btn">REFRESH</button>
+              </div>
+            </div>
+
+            <!-- ---- Appearance ---- -->
+            <div class="settings-section">
+              <div class="settings-section-title">APPEARANCE</div>
+              <div class="settings-row">
+                <span>Text Size</span>
+                <select id="setting-text-size" class="settings-combo">
+                  <option value="13">13px</option>
+                  <option value="15">15px</option>
+                  <option value="17">17px</option>
+                  <option value="19">19px</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- ---- About ---- -->
+            <div class="settings-section">
+              <div class="settings-section-title">ABOUT</div>
+              <div class="settings-about">
+                <b>CORE</b> — Code Orchestration &amp; Real-time Engineering<br />
+                Your code. Your AI. Your control.<br /><br />
+                An AI-powered development environment for Windows.<br /><br />
+                API keys and the log file live in the app's data folder — never
+                in the database and never in the repository.
+              </div>
+              <div class="settings-row">
+                <span>OpenCode CLI</span>
+                <span id="opencode-version" class="setting-value">checking…</span>
+              </div>
+              <button id="btn-quit" class="quit-btn">QUIT THECORE</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <script src="vendor/xterm.js"></script>
+  <script src="vendor/xterm-addon-fit.js"></script>
+  <script src="provider_icons.js"></script>
+  <script src="conversation_title.js"></script>
+  <script src="tool_calls.js"></script>
+  <script src="model_catalogue.js"></script>
+  <script src="sidebar.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

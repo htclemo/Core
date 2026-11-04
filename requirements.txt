@@ -1,0 +1,12 @@
+PySide6>=6.6.0
+pyqtgraph>=0.13.3
+psutil>=5.9.8
+nvidia-ml-py>=12.535.133
+numpy>=1.26.0
+pywin32>=306; platform_system=="Windows"
+pywinpty>=3.1.0; platform_system=="Windows"
+pyte>=0.8.2
+Pillow>=10.0.0
+pycaw>=20240210
+comtypes>=1.4.0
+pyinstaller>=6.11.0; platform_system=="Windows"

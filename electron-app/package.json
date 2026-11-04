@@ -1,0 +1,30 @@
+{
+  "name": "core",
+  "productName": "Core",
+  "version": "2.0.0",
+  "description": "Core — Local PC Monitor + AI Chat (Cursor-style, Electron/TypeScript)",
+  "main": "dist/main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "ts-node src/main.ts",
+    "build": "tsc",
+    "postinstall": "node scripts/postinstall.js",
+    "rebuild": "electron-rebuild -f -o better-sqlite3"
+  },
+  "author": "TheCore",
+  "license": "MIT",
+  "devDependencies": {
+    "@electron/rebuild": "^4.2.1",
+    "@types/better-sqlite3": "^9.6.0",
+    "@types/node": "^20.0.0",
+    "electron": "^29.0.0",
+    "ts-node": "^10.9.0",
+    "typescript": "^5.4.0"
+  },
+  "dependencies": {
+    "@xterm/addon-fit": "^0.11.0",
+    "@xterm/xterm": "^6.0.0",
+    "better-sqlite3": "^11.10.0",
+    "node-pty": "^1.1.0"
+  }
+}
