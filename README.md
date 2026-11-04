@@ -4,29 +4,7 @@ Local AI workspace for Windows and Linux. Chat with Ollama, OpenCode, and cloud 
 
 ## Download
 
-There will be a Windows installer and a Linux installer. When the first demo is finished, the program can be downloaded and installed from those installers. Until then, Core is run from the source tree below.
-
-## Setup
-
-```powershell
-cd C:\Users\Lemo\Documents\Core
-python -m venv .venv
-.\.venv\Scripts\Activate.ps1
-pip install -r requirements.txt
-```
-
-## Run
-
-```powershell
-.\.venv\Scripts\Activate.ps1
-python main.py
-```
-
-Or without a console window:
-
-```powershell
-.\.venv\Scripts\pythonw.exe main.py
-```
+There will be a Windows installer and a Linux installer. When the first demo is finished, the program can be downloaded and installed from those installers.
 
 ## Tabs
 
