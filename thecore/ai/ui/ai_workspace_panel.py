@@ -1,4 +1,4 @@
-"""Main AI workspace area: left sidebar + right chat (Cursor-style split).
+"""Main AI workspace area: left sidebar and the chat.
 
 The sidebar's gear icon (bottom-left) opens the settings page, which slides
 in over the chat.  Everything the program can be configured with lives
@@ -26,7 +26,7 @@ from thecore.ai.ui.sidebar import Sidebar
 
 
 class AIWorkspacePanel(QFrame):
-    """Cursor-style AI panel: sidebar (workspaces/projects) + main chat."""
+    """AI panel: sidebar (workspaces and projects) and the main chat."""
 
     # The settings page was opened or closed.
     settings_visibility_changed = Signal(bool)

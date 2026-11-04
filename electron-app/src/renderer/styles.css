@@ -1,4 +1,4 @@
-/* TheCore — Rounded Cursor-style holographic theme */
+/* Core — rounded holographic theme */
 
 :root {
   --bg: #0b0e0c;
@@ -855,7 +855,7 @@ body {
 .sidebar-expand-btn:hover { background: #1c211e; color: var(--accent); }
 .ai-sidebar.collapsed { display: none; }
 
-/* ---- the composer (Cursor-style input area) ---- */
+/* ---- the composer ---- */
 .composer {
   background: #101010;
   border-top: 1px solid var(--border);

@@ -28,21 +28,11 @@ Or without a console window:
 .\.venv\Scripts\pythonw.exe main.py
 ```
 
-## Desktop shortcut
-
-After the venv is set up:
-
-```powershell
-.\create_shortcut.ps1
-```
-
-This creates **Core.lnk** on your Desktop pointing at the project's `pythonw.exe` and `main.py`.
-
 ## Tabs
 
 | Tab | Purpose |
 |-----|---------|
-| **AI** | Cursor-style chat with your local Ollama LLM. Organize chats into workspaces and projects. |
+| **AI** | Chat with your local Ollama model. Organize chats into workspaces and projects. |
 
 ## AI / Ollama features
 

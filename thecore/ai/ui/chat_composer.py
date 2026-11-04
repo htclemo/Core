@@ -1,4 +1,4 @@
-"""The chat composer: a Cursor-style input area.
+"""The chat composer.
 
 The composer is one rounded block that carries everything you need to start
 a turn:

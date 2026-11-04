@@ -1,4 +1,4 @@
-"""Cursor-style left sidebar: a flat tree of projects, workspaces and chats.
+"""Left sidebar: a flat tree of projects, workspaces and chats.
 
 Rows are real widgets (not ``QListWidget`` overlays). Overlay widgets get
 painted over by the item delegate, which collapsed titles and hid the delete

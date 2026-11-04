@@ -1,4 +1,4 @@
-"""Main AI chat panel: Cursor-style layout with OpenCode console at bottom.
+"""Main AI chat panel, with the OpenCode console in the main area.
 
 Header: provider + model + load/unload + status + memory
 Left sidebar: workspaces / projects / conversations (in AIWorkspacePanel)
@@ -112,7 +112,7 @@ class _BgCall(QThread):
 
 
 class ChatPanel(QFrame):
-    """Cursor-style chat panel wired to Ollama + an embedded OpenCode console."""
+    """Chat panel wired to Ollama and an embedded OpenCode console."""
 
     new_project_created = Signal()
     new_workspace_created = Signal()

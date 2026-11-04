@@ -797,7 +797,7 @@ ipcMain.on("app:quit", () => {
 
 // ------------------------------------------------------------------ menu
 
-/** Build the application menu (File / Edit / View / Help), like Cursor. */
+/** Build the application menu (File / Edit / View / Help). */
 function buildMenu(): void {
   const send = (channel: string, ...args: any[]) => {
     if (mainWindow) mainWindow.webContents.send(channel, ...args);

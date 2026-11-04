@@ -1,7 +1,7 @@
 # TheCore — Agent Instructions
 
 ## Project Overview
-TheCore is a local Windows PC monitor with an integrated Cursor-style AI chat interface for local LLMs (Ollama). It runs entirely on the user's machine.
+Core is a local AI chat for local LLMs (Ollama). It runs entirely on the user's machine.
 
 **Project location:** `C:\Users\Lemo\Documents\TheCore`
 **Entry point:** `C:\Users\Lemo\Documents\TheCore/main.py`
@@ -10,7 +10,7 @@ TheCore is a local Windows PC monitor with an integrated Cursor-style AI chat in
 ## Architecture
 
 ### Tabs
-- **AI** — Cursor-style chat interface with:
+- **AI** — chat interface with:
   - Left sidebar: Workspaces → Projects → Conversations
   - Main area: Streaming chat with Ollama or OpenCode
   - Model selector with GPU VRAM / system RAM tracking
@@ -25,7 +25,7 @@ TheCore/
 │   ├── __init__.py            # Package version
 │   ├── app.py                 # QApplication bootstrap
 │   ├── splash.py              # Round splash screen (min 10s, module animation)
-│   ├── styles.py              # Cursor-style dark theme stylesheet
+│   ├── styles.py              # Dark theme stylesheet
 │   ├── audio/
 │   │   └──
 │   ├── collectors/
@@ -46,7 +46,7 @@ TheCore/
 │   │   ├── model_catalogue.py # Local + cloud models in one dropdown
 │   │   └── ui/
 │   │       ├── __init__.py
-│   │       ├── ai_workspace_panel.py   # Sidebar + chat split (Cursor-style)
+│   │       ├── ai_workspace_panel.py   # Sidebar + chat split
 │   │       ├── chat_panel.py           # Chat UI, model selector, memory display
 │   │       ├── chat_composer.py        # Provider picker, model dropdown, input
 │   │       ├── settings_page.py        # The settings page (the gear in the sidebar)

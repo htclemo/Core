@@ -415,7 +415,7 @@ class TerminalWidget(QWidget):
                 line = buffer.get(row, {})
                 self._paint_line(painter, row, line, cols, metrics)
 
-        # Cursor.
+        # Text caret.
         if offset == 0 and not screen.cursor.hidden:
             cx = screen.cursor.x
             cy = screen.cursor.y

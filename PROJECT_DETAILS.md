@@ -1,7 +1,7 @@
 # TheCore — Project Details
 
 ## Goal
-A Cursor-like program for local LLMs, embedded inside the existing TheCore PC monitor.
+A local LLM workspace inside Core.
 Use a local LLM (Ollama) for AI chat, keep track of PC metrics, save workspaces/conversations,
 and eventually package as `The_Core_Setup.exe`.
 
@@ -18,10 +18,10 @@ and eventually package as `The_Core_Setup.exe`.
 - **Live/automatic refresh at 1 second** (no manual scan control)
 
 ### AI Chat (AI tab)
-- **Chat input:** a Cursor-style composer — provider and scope pickers, a multi-line input, an
+- **Chat input:** a composer — provider and scope pickers, a multi-line input, an
   attach button, the model picker, dictation (Win+H) and read-aloud (SAPI) and the "Multitask"
   action chip that pre-fills the input
-- **Left sidebar (Cursor-style):**
+- **Left sidebar:**
   - Workspaces → Projects → Conversations, each row with a hover trash bin
   - Deleting a project removes its conversations and messages too
   - A new conversation is named after its first question ("Mouse", "Tesla", "Python"…)
@@ -213,7 +213,7 @@ no longer depends on it.
 
 ### Modified files
 - `thecore/ui/main_window.py` — Tabbed window (SYSTEMS + AI), removed manual refresh
-- `thecore/styles.py` — Cursor-style dark theme
+- `thecore/styles.py` — dark theme
 - `thecore/admin.py` — Windows elevation (`is_admin`, `relaunch_as_admin`)
 - `thecore/app.py`, `thecore/splash.py` - Square boot-console splash, 10s minimum, boot log + sound
 - `tools/make_sounds.py` - Synthesises the start-up WAV files

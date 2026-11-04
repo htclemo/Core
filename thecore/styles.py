@@ -1,4 +1,4 @@
-"""Star Wars–inspired holographic theme — Cursor style, rounded edges everywhere."""
+"""Star Wars–inspired holographic theme — rounded edges everywhere."""
 
 APP_STYLESHEET = """
 QWidget {
@@ -712,7 +712,7 @@ QPushButton#chatAttachButton:disabled {
     padding: 3px 8px;
 }
 
-/* ---- the chat composer (Cursor-style input area) ---- */
+/* ---- the chat composer ---- */
 #chatComposer {
     background-color: #101010;
     border-top: 1px solid #2d332e;

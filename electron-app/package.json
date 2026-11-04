@@ -2,7 +2,7 @@
   "name": "core",
   "productName": "Core",
   "version": "2.0.0",
-  "description": "Core — Local PC Monitor + AI Chat (Cursor-style, Electron/TypeScript)",
+  "description": "Core — local AI chat (Electron/TypeScript)",
   "main": "dist/main.js",
   "scripts": {
     "start": "electron .",
