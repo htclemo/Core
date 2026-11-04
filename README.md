@@ -1,7 +1,7 @@
 # Core
 
 <p align="center">
-  <img src="assets/core_icon.png" alt="Core" width="160">
+  <img src="core_the_project.png" alt="Core" width="720">
 </p>
 
 Local AI workspace for Windows and Linux. Chat with Ollama, OpenCode, and cloud models. Your chats stay on your machine.
