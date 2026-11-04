@@ -1,6 +1,10 @@
 # Core
 
-Local Windows PC monitor — CPU, GPU (NVIDIA), memory, per-drive speeds, network usage, and a process peek — plus a built-in local LLM (Ollama) chat with workspaces, projects, and saved conversations. Runs entirely on your machine from a Desktop shortcut.
+Local AI workspace for Windows and Linux. Chat with Ollama, OpenCode, and cloud models. Your chats stay on your machine.
+
+## Download
+
+There will be a Windows installer and a Linux installer. When the first demo is finished, the program can be downloaded and installed from those installers. Until then, Core is run from the source tree below.
 
 ## Setup
 
